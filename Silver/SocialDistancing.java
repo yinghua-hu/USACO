@@ -1,4 +1,4 @@
-//package open2020Silver;
+package open2020Silver;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -38,13 +38,16 @@ public class SocialDistancing {
 		myWriter.write(String.valueOf(ans));
 	    myWriter.close();
 	}
+	
 	public static boolean canNotDo(long[][] intervals, long D) {
-		long prev = Long.MIN_VALUE;
-		int count = 0;
-		int i = 0;
+		if (intervals[m - 1][1] - intervals[0][0] < (n - 1) * D) {
+			return true;
+		}
+		long count = 0;
+		long pre = Long.MIN_VALUE;
 		for (long[] interval : intervals) {
-			while (Math.max(prev + D, interval[0]) <= interval[1]) {
-				prev = Math.max(prev + D, interval[0]);
+			while (Math.max(pre + D, interval[0]) <= interval[1]) {
+				pre = Math.max(pre + D, interval[0]);
 				count++;
 				if (count >= n) {
 					return false;
